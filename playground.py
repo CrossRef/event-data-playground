@@ -21,7 +21,8 @@ def print_json_indent(data):
 
 def main_top_n_total():
   """Top N per source"""
-  print("# Top %d Events per source by total" % top_n)
+  print("# Top %d Events per source by total on %s" % (top_n, date))
+  print("Useful for sources that use the `total` field, e.g. Facebook.")
   for source in sources:
     print("## Source: %s" % source)
     url = api_date_source % {"source": source, "date": date, "view": "collected"}
@@ -35,7 +36,8 @@ def main_top_n_total():
 
 def main_top_n_count():
   """Top N per source"""
-  print("# Top %d DOIs per source by total" % top_n)
+  print("# Top %d DOIs per source by count on %s" % (top_n, date))
+  print("Useful for sources that may mention the same DOI repeatedly, e.g. Twitter, Wikipedia, Newsfeed, Reddit")
   for source in sources:
     print("## Source: %s" % source)
     url = api_date_source % {"source": source, "date": date, "view": "collected"}
@@ -60,7 +62,8 @@ def main_top_n_count():
 
 def main_source_diversity():
   """Return top N events ordered by the diversity of sources for the subject."""
-  print("# DOIs that have events from more than one source.")
+  print("# DOIs that have events from more than one source on %s." % date)
+  print("Useful for DOIs that get discussed on multiple platforms.")
   url = api_date_all % {"date": date, "view": "collected"}
   events = requests.get(url).json()['events']
 
